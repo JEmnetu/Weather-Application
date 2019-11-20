@@ -1,0 +1,56 @@
+#main-heading {
+    color: white;
+}
+
+
+/* .searchDiv {
+    background-color: rgb(226, 29, 29);
+    height: 10em; */
+
+
+/* margin-top: 10px; */
+
+
+/* 
+}
+
+#weatherBox {
+    border: solid 2px grey;
+}
+.test {
+    background-color: aqua;
+} */
+
+#test1 {
+    background-color: rgb(202, 196, 193);
+    height: 100vh;
+}
+
+#test2 {
+    background-color: pink;
+    height: 100vh;
+}
+
+#nest1 {
+    border: solid 4px green;
+    height: 250px;
+    margin-bottom: 30px;
+}
+
+#nest2 {
+    border: solid 6px black;
+    height: 100px;
+}
+
+.footer {
+    background-color: darkgray;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+}
+
+#cityDiv {
+    border: solid 4px green;
+    height: 30%;
+}
