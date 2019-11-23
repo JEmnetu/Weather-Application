@@ -22,24 +22,27 @@
 } */
 
 #test1 {
-    background-color: rgb(202, 196, 193);
+    background-color: rgba(170, 228, 229, 0.836);
     height: 100vh;
 }
 
 #test2 {
-    background-color: pink;
+    background-color: white;
     height: 100vh;
+    padding-left: 28px;
+    padding-right: 28px;
+    padding-top: 20px;
 }
 
 #nest1 {
-    border: solid 4px green;
+    border: solid 2px rgba(128, 128, 128, 0.336);
     height: 250px;
     margin-bottom: 30px;
+    background-color: white;
 }
 
 #nest2 {
-    border: solid 6px black;
-    height: 100px;
+    height: auto;
 }
 
 .footer {
@@ -51,6 +54,81 @@
 }
 
 #cityDiv {
-    border: solid 4px green;
-    height: 30%;
+    border: solid 3px grey;
+    height: 300px;
+    margin-bottom: 80px;
+    background-color: white;
+    padding: 15px;
+}
+
+#cityName {
+    margin-bottom: 20px;
+    color: black;
+}
+
+.cityPg {
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.weatherBlock {
+    background-color: rgb(0, 119, 255);
+    color: white;
+    border-radius: 10px;
+}
+
+.card {
+    display: inline-block;
+    margin-left: 35px;
+}
+
+.card-row {
+    margin-left: 0px;
+}
+
+.container-fluid {
+    margin-bottom: 20px;
+}
+
+#searchBar {
+    margin-top: 20px;
+}
+
+h4 {
+    margin-bottom: 20px;
+}
+
+.lowUV {
+    background-color: greenyellow;
+    display: inline;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.medUV {
+    background-color: rgb(255, 241, 47);
+    display: inline;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.highUV {
+    background-color: rgb(255, 47, 47);
+    display: inline;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#history {
+    margin-top: 20px;
+}
+
+p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#history p {
+    background-color: red;
+    padding: 10px;
 }
