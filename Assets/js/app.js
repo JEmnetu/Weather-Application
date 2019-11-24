@@ -37,7 +37,9 @@ $(document).ready(
         let historyDiv = $('<div>');
         var cityQ = searchB.val();
         historyLink = $('<p>').text(cityQ);
+        historyLink.attr('data-city', cityQ);
         historyEl.append(historyLink);
+
 
         // var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?q=" +
         //     cityQ + "&units=imperial&appid=" + APIKey;
@@ -57,7 +59,7 @@ $(document).ready(
 
                 // City Name + Date
 
-                var city = $('<h2>');
+                var city = $('<div>');
 
                 var rawDate = new Date((data.city.sunrise) * 1000);
                 var d = rawDate.getDate();
@@ -66,8 +68,8 @@ $(document).ready(
                 var date = (m + '/' + d + '/' + y);
 
 
-                city.text('City name: ' + data.city.name + ' ' + date);
-                city.attr('id', 'cityName');
+                city.html('<h1 id="cityName">City name: ' + data.city.name + ' ' + date + '</h1>');
+                // city.attr('id', 'cityName');
                 cityEl.append(city);
 
                 // Coordinates for UV API call

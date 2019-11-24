@@ -2,25 +2,6 @@
     color: white;
 }
 
-
-/* .searchDiv {
-    background-color: rgb(226, 29, 29);
-    height: 10em; */
-
-
-/* margin-top: 10px; */
-
-
-/* 
-}
-
-#weatherBox {
-    border: solid 2px grey;
-}
-.test {
-    background-color: aqua;
-} */
-
 #test1 {
     background-color: rgba(170, 228, 229, 0.836);
     height: 100vh;
@@ -129,6 +110,8 @@ p {
 }
 
 #history p {
-    background-color: red;
+    border: solid 2px grey;
+    background-color: antiquewhite;
     padding: 10px;
+    margin: 0px;
 }
