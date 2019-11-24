@@ -55,9 +55,18 @@ $(document).ready(
                 cityEl.empty();
                 var brk = $('<br>');
 
-                // City Name
+                // City Name + Date
+
                 var city = $('<h2>');
-                city.text('City name: ' + data.city.name);
+
+                var rawDate = new Date((data.city.sunrise) * 1000);
+                var d = rawDate.getDate();
+                var m = rawDate.getMonth() + 1;
+                var y = rawDate.getFullYear();
+                var date = (m + '/' + d + '/' + y);
+
+
+                city.text('City name: ' + data.city.name + ' ' + date);
                 city.attr('id', 'cityName');
                 cityEl.append(city);
 
