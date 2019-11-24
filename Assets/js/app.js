@@ -3,6 +3,11 @@ var forecastEl = $('#nest2');
 var searchF = $('#searchForm');
 var searchB = $('#searchBar');
 var historyEl = $('#history');
+var firstCard = $('#card1');
+var secondCard = $('#card2');
+var thirdCard = $('#card3');
+var fourthCard = $('#card4');
+var fifthCard = $('#card5');
 
 
 
@@ -24,11 +29,16 @@ $(document).ready(
     searchF.on('submit', function() {
 
         event.preventDefault();
+        firstCard.empty();
+        secondCard.empty();
+        thirdCard.empty();
+        fourthCard.empty();
+        fifthCard.empty();
         let historyDiv = $('<div>');
         var cityQ = searchB.val();
         historyLink = $('<p>').text(cityQ);
         historyEl.append(historyLink);
-        console.log(cityQ);
+
         // var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?q=" +
         //     cityQ + "&units=imperial&appid=" + APIKey;
 
@@ -40,7 +50,8 @@ $(document).ready(
             })
             .then(function(data) {
                 console.log(data);
-                // Reset Div
+                // Reset Divs
+                // firstCard.empty();
                 cityEl.empty();
                 var brk = $('<br>');
 
@@ -50,16 +61,18 @@ $(document).ready(
                 city.attr('id', 'cityName');
                 cityEl.append(city);
 
+                // Coordinates for UV API call
                 var lat = data.city.coord.lat;
                 var lon = data.city.coord.lon;
                 var uvUrl = 'http://api.openweathermap.org/data/2.5/uvi?appid=' + APIKey + '&lat=' + lat + '&lon=' + lon;
 
 
                 // Temperature
-                var temp = $('<p>');
-                temp.text('Current Temperature: ' + data.list[0].main.temp);
+                var temp = $('<div>');
+                temp.html('<p>Current Temperature: ' + data.list[0].main.temp + '&#8457</p>');
                 temp.addClass('cityPg');
                 cityEl.append(temp);
+
 
 
                 // Humidity
@@ -72,6 +85,60 @@ $(document).ready(
                 var wind = $('<p>').text('Wind Speed: ' + data.list[0].wind.speed + ' MPH');
                 wind.addClass('cityPg');
                 cityEl.append(wind);
+
+                // Display Data for 5 day forecast
+
+
+                var counter = 1;
+
+                for (var i = 3; i < data.list.length; i += 8) {
+
+
+
+                    var weatherCard = $("div[data-count='" + counter + "']");
+                    var rawDate = new Date((data.list[i].dt) * 1000);
+                    var d = rawDate.getDate();
+                    var m = rawDate.getMonth() + 1;
+                    var y = rawDate.getFullYear();
+                    var date = (m + '/' + d + '/' + y);
+                    console.log(date);
+                    var dateEl = $('<h5>');
+                    dateEl.text(date);
+                    weatherCard.append(dateEl);
+                    // $.ajax({
+                    //         url: 'https://api.openweathermap.org/data/2.5/weather?q=' + cityQ + '&units=imperial&appid=' + APIKey,
+                    //         method: 'GET'
+                    //     })
+                    //     .then(function(iconData) {
+
+                    //         var pic = $('<img>');
+                    //         var picSrc = 'http://openweathermap.org/img/wn/' + iconData.weather[0].icon + '@2x.png';
+                    //         pic.attr('src', picSrc);
+                    //         weatherCard.append(pic);
+
+                    //     })
+
+                    var weatherBlockTemp = $('<div>');
+                    weatherBlockTemp.html('<p>' + data.list[i].main.temp + '&#8457</p>');
+
+
+                    weatherCard.append(weatherBlockTemp);
+
+                    console.log(data.list[i].weather[0].icon);
+                    var weatherIcon = $('<img>');
+                    iconSrc = 'http://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '@2x.png';
+                    weatherIcon.attr('src', iconSrc);
+                    weatherIcon.attr('width', '60px');
+                    weatherIcon.attr('height', '60px')
+                    weatherCard.append(weatherIcon);
+
+                    counter += 1;
+                    console.log(counter);
+
+                }
+
+
+
 
                 // UV
                 $.ajax({
@@ -94,6 +161,7 @@ $(document).ready(
                         }
                         cityEl.append(uv);
                     })
+
 
                 // Function to grab basic weather info about city, will grab city name from search bar input
                 btn1.on('click', function() {
@@ -193,9 +261,3 @@ $(document).ready(
 //                 }
 //                 cityEl.append(uv);
 //             })
-
-// var rawDate = new Date((response.list[16].dt) * 1000);
-// var d = rawDate.getDate();
-// var m = rawDate.getMonth();
-// var y = rawDate.getFullYear();
-// var date = (m + '/' + d + '/' + y);
