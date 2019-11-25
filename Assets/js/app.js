@@ -2,6 +2,7 @@ var cityEl = $('#cityDiv');
 var forecastEl = $('#nest2');
 var searchF = $('#searchForm');
 var searchB = $('#searchBar');
+var searchBtn = $('#searchButton');
 var historyEl = $('#history');
 var firstCard = $('#card1');
 var secondCard = $('#card2');

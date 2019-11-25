@@ -75,6 +75,10 @@
     margin-top: 20px;
 }
 
+#searchBtn {
+    width: 100vw;
+}
+
 h4 {
     margin-bottom: 20px;
 }
