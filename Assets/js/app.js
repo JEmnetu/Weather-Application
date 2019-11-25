@@ -70,7 +70,7 @@ $(document).ready(
                 var date = (m + '/' + d + '/' + y);
 
 
-                city.html('<h1 id="cityName">City name: ' + data.city.name + ' ' + date + '</h1>');
+                city.html('<h1 id="cityName"> ' + data.city.name + ' ' + date + '</h1>');
                 // city.attr('id', 'cityName');
                 cityEl.append(city);
 
