@@ -109,9 +109,47 @@ p {
     margin-bottom: 0px;
 }
 
-#history p {
+.historyBtn {
     border: solid 2px grey;
     background-color: antiquewhite;
     padding: 10px;
     margin: 0px;
+    width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    #test1 {
+        height: 30vh;
+        overflow: auto;
+    }
+    #cityDiv {
+        height: 45vh;
+    }
+    .footer {
+        margin-top: 10px;
+    }
+    #forecastHeading {
+        text-align: center;
+    }
+    header {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #test1 {
+        height: 100vh;
+    }
+    .card-row {
+        width: 30%;
+        /* background-color: red; */
+        max-height: 1em;
+    }
+    .card {
+        width: 20em;
+        height: 20em;
+        margin: 19px;
+        display: inline-block;
+    }
 }

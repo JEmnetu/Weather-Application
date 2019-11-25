@@ -36,8 +36,9 @@ $(document).ready(
         fifthCard.empty();
         let historyDiv = $('<div>');
         var cityQ = searchB.val();
-        historyLink = $('<p>').text(cityQ);
+        historyLink = $('<button>').text(cityQ);
         historyLink.attr('data-city', cityQ);
+        historyLink.addClass('historyBtn');
         historyEl.append(historyLink);
 
 
