@@ -43,7 +43,7 @@ $(document).ready(
 
 
 
-        historyLink = $('<p>').text(localStorage.getItem('City-Name'));
+        historyLink = $('<p>').text(cityQ);
         // historyLink = $('<p>').text(cityQ);
         historyLink.attr('data-city', cityQ);
 
