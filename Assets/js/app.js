@@ -37,10 +37,25 @@ $(document).ready(
         fifthCard.empty();
         let historyDiv = $('<div>');
         var cityQ = searchB.val();
-        historyLink = $('<button>').text(cityQ);
+        // var localCity = localStorage.setItem('City-Name', cityQ);
+        // var retr = localStorage.getItem('City-Name');
+
+
+
+
+        historyLink = $('<p>').text(localStorage.getItem('City-Name'));
+        // historyLink = $('<p>').text(cityQ);
         historyLink.attr('data-city', cityQ);
+
         historyLink.addClass('historyBtn');
         historyEl.append(historyLink);
+
+        var historyEntr = historyEl.html();
+        window.localStorage.setItem('entry', historyEntr);
+
+        // historyEl.append(retr);
+
+        // console.log(historyEntry);
 
 
         // var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -144,6 +159,9 @@ $(document).ready(
                     weatherIcon.attr('width', '60px');
                     weatherIcon.attr('height', '60px')
                     weatherCard.append(weatherIcon);
+                    var humidity2 = $('<p>').text('Humidity: ' + data.list[i].main.humidity + ' %');
+                    weatherCard.append(humidity2);
+
 
                     counter += 1;
                     console.log(counter);
@@ -177,28 +195,7 @@ $(document).ready(
 
 
                 // Function to grab basic weather info about city, will grab city name from search bar input
-                btn1.on('click', function() {
-                        // Reset Div
-                        cityEl.empty();
-                        var brk = $('<br>');
 
-                        // City Name
-                        var city = $('<h2>');
-                        city.text('City name: ' + data.city.name);
-                        city.attr('id', 'cityName');
-                        cityEl.append(city);
-
-
-
-
-
-
-                        // UV Index
-
-
-                    }
-
-                );
 
             });
     })
