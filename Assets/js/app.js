@@ -1,66 +1,54 @@
-var cityEl = $('#cityDiv');
-var forecastEl = $('#nest2');
-var searchF = $('#searchForm');
-var searchB = $('#searchBar');
-var searchBtn = $('#searchButton');
-var historyEl = $('#history');
-var firstCard = $('#card1');
-var secondCard = $('#card2');
-var thirdCard = $('#card3');
-var fourthCard = $('#card4');
-var fifthCard = $('#card5');
-
-
-
-
-
-var APIKey = '7eb2e3aab4d0bbe005ec0933144dbca0';
-// Weather API
-
-
-// 5 Day forecast API
-var queryURL2 = 'https://api.openweathermap.org/data/2.5/forecast?id=4366647&units=imperial&appid=' + APIKey;
+$(document).ready(function() {
+    var cityEl = $('#cityDiv');
+    var forecastEl = $('#nest2');
+    var searchF = $('#searchForm');
+    var searchB = $('#searchBar');
+    var searchBtn = $('#searchButton');
+    var historyEl = $('#history');
+    var firstCard = $('#card1');
+    var secondCard = $('#card2');
+    var thirdCard = $('#card3');
+    var fourthCard = $('#card4');
+    var fifthCard = $('#card5');
+    var citiesList = [];
+    var previousCities = '';
+    var cityQ = '';
+    var butto = $('#btnn');
 
 
 
 
 
 
-$(document).ready(
-    searchF.on('submit', function() {
+    var APIKey = '7eb2e3aab4d0bbe005ec0933144dbca0';
+    // Weather API
 
-        event.preventDefault();
+
+    // 5 Day forecast API
+    var queryURL2 = 'https://api.openweathermap.org/data/2.5/forecast?id=4366647&units=imperial&appid=' + APIKey;
+
+
+    function clearDivs() {
         firstCard.empty();
         secondCard.empty();
         thirdCard.empty();
         fourthCard.empty();
         fifthCard.empty();
-        let historyDiv = $('<div>');
-        var cityQ = searchB.val();
-        // var localCity = localStorage.setItem('City-Name', cityQ);
-        // var retr = localStorage.getItem('City-Name');
+    }
+
+    function clearHistory() {
+        historyEl.empty();
+        cityEl.empty();
+        weatherCard.empty();
+
+    }
+    // Display Data for 5 day forecast
 
 
 
 
-        historyLink = $('<p>').text(cityQ);
-        // historyLink = $('<p>').text(cityQ);
-        historyLink.attr('data-city', cityQ);
 
-        historyLink.addClass('historyBtn');
-        historyEl.append(historyLink);
-
-        var historyEntr = historyEl.html();
-        window.localStorage.setItem('entry', historyEntr);
-
-        // historyEl.append(retr);
-
-        // console.log(historyEntry);
-
-
-        // var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?q=" +
-        //     cityQ + "&units=imperial&appid=" + APIKey;
-
+    function currentWeather() {
         var queryURL1 = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityQ + '&units=imperial&appid=' + APIKey;
         // Weather API
         $.ajax({
@@ -68,6 +56,7 @@ $(document).ready(
                 method: 'GET'
             })
             .then(function(data) {
+
                 console.log(data);
                 // Reset Divs
                 // firstCard.empty();
@@ -95,6 +84,7 @@ $(document).ready(
                 var uvUrl = 'http://api.openweathermap.org/data/2.5/uvi?appid=' + APIKey + '&lat=' + lat + '&lon=' + lon;
 
 
+
                 // Temperature
                 var temp = $('<div>');
                 temp.html('<p>Current Temperature: ' + data.list[0].main.temp + '&#8457</p>');
@@ -113,10 +103,6 @@ $(document).ready(
                 var wind = $('<p>').text('Wind Speed: ' + data.list[0].wind.speed + ' MPH');
                 wind.addClass('cityPg');
                 cityEl.append(wind);
-
-                // Display Data for 5 day forecast
-
-
                 var counter = 1;
 
                 for (var i = 3; i < data.list.length; i += 8) {
@@ -165,12 +151,7 @@ $(document).ready(
 
                     counter += 1;
                     console.log(counter);
-
                 }
-
-
-
-
                 // UV
                 $.ajax({
                         url: uvUrl,
@@ -193,14 +174,50 @@ $(document).ready(
                         cityEl.append(uv);
                     })
 
+            })
 
-                // Function to grab basic weather info about city, will grab city name from search bar input
+
+    }
 
 
-            });
-    })
 
-);
+    searchF.on('submit', function() {
+        event.preventDefault();
+
+
+        clearDivs();
+        cityQ = searchB.val();
+        currentWeather();
+
+
+        historyLink = $('<p>').text(cityQ);
+        historyLink.attr('data-city', cityQ);
+        historyLink.addClass('historyBtn');
+        historyEl.append(historyLink);
+    });
+
+    butto.on('click', clearHistory);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Function to grab basic weather info about city, will grab city name from search bar input
+
+
+
+
+
 
 
 
