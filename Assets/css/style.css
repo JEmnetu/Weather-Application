@@ -116,9 +116,10 @@ p {
 .historyBtn {
     border: solid 2px grey;
     background-color: antiquewhite;
-    padding: 10px;
+    padding-top: 10px;
     margin: 0px;
     width: 100%;
+    text-align: center;
 }
 
 @media only screen and (max-width: 768px) {

@@ -189,8 +189,8 @@ $(document).ready(function() {
         cityQ = searchB.val();
         currentWeather();
 
+        historyLink = $('<div>').html('<p onclick="currentWeather()"> This is: ' + cityQ + '</p>');
 
-        historyLink = $('<p>').text(cityQ);
         historyLink.attr('data-city', cityQ);
         historyLink.addClass('historyBtn');
         historyEl.append(historyLink);
