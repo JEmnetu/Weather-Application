@@ -14,6 +14,7 @@ $(document).ready(function() {
     var previousCities = '';
     var cityQ = '';
     var butto = $('#btnn');
+    var cities = JSON.parse(localStorage.getItem('cities'));
 
 
 
@@ -39,7 +40,15 @@ $(document).ready(function() {
     function clearHistory() {
         historyEl.empty();
         cityEl.empty();
-        weatherCard.empty();
+        firstCard.empty();
+        secondCard.empty();
+        thirdCard.empty();
+        fourthCard.empty();
+        fifthCard.empty();
+
+        console.log(localStorage);
+        localStorage.clear();
+        console.log(localStorage);
 
     }
     // Display Data for 5 day forecast
@@ -57,7 +66,6 @@ $(document).ready(function() {
             })
             .then(function(data) {
 
-                console.log(data);
                 // Reset Divs
                 // firstCard.empty();
                 cityEl.empty();
@@ -81,7 +89,7 @@ $(document).ready(function() {
                 // Coordinates for UV API call
                 var lat = data.city.coord.lat;
                 var lon = data.city.coord.lon;
-                var uvUrl = 'http://api.openweathermap.org/data/2.5/uvi?appid=' + APIKey + '&lat=' + lat + '&lon=' + lon;
+                var uvUrl = 'https://api.openweathermap.org/data/2.5/uvi?appid=' + APIKey + '&lat=' + lat + '&lon=' + lon;
 
 
 
@@ -115,7 +123,7 @@ $(document).ready(function() {
                     var m = rawDate.getMonth() + 1;
                     var y = rawDate.getFullYear();
                     var date = (m + '/' + d + '/' + y);
-                    console.log(date);
+
                     var dateEl = $('<h5>');
                     dateEl.text(date);
                     weatherCard.append(dateEl);
@@ -138,7 +146,7 @@ $(document).ready(function() {
 
                     weatherCard.append(weatherBlockTemp);
 
-                    console.log(data.list[i].weather[0].icon);
+
                     var weatherIcon = $('<img>');
                     iconSrc = 'http://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '@2x.png';
                     weatherIcon.attr('src', iconSrc);
@@ -150,7 +158,7 @@ $(document).ready(function() {
 
 
                     counter += 1;
-                    console.log(counter);
+
                 }
                 // UV
                 $.ajax({
@@ -162,7 +170,7 @@ $(document).ready(function() {
                         var uvIndex = uvData.value;
                         var uv = $('<p>');
                         uv.html('UV Index: <span id="uvSpan">' + uvIndex + '</span>');
-                        console.log(uvIndex);
+
 
                         if (uvIndex >= 0 && uvIndex <= 3) {
                             $(uv).addClass('lowUV');
@@ -179,24 +187,58 @@ $(document).ready(function() {
 
     }
 
+    function initialize() {
 
+        if (cities === null) {
+            cities = [];
+        }
+        citiesList = cities;
+        console.log(cities);
+    }
 
-    searchF.on('submit', function() {
+    function search() {
         event.preventDefault();
+
+
 
 
         clearDivs();
         cityQ = searchB.val();
         currentWeather();
 
-        historyLink = $('<div>').html('<p onclick="currentWeather()"> This is: ' + cityQ + '</p>');
+        historyLink = $('<div>').html('<p onclick="currentWeather()"> ' + cityQ + '</p>');
+        // Save city name to storage
+        citiesList.push(cityQ);
+        // var cityHistory = {
+        //     city_name: cityQ
+        // }
+        // localStorage.setItem('Search Entry', cityHistory);
+        // console.log(cityHistory);
+        localStorage.setItem('cities', JSON.stringify(citiesList));
 
         historyLink.attr('data-city', cityQ);
         historyLink.addClass('historyBtn');
         historyEl.append(historyLink);
-    });
+    }
 
-    butto.on('click', clearHistory);
+
+
+
+
+
+
+
+    initialize();
+
+    searchF.on('submit', search);
+
+
+
+    butto.on('click', function() {
+        clearHistory();
+
+
+    });
 });
 
 
