@@ -3,7 +3,7 @@
 }
 
 #test1 {
-    background-color: rgba(170, 228, 229, 0.836);
+    background-color: rgba(36, 41, 41, 0.377);
     height: 100vh;
 }
 
@@ -53,14 +53,18 @@
 }
 
 .weatherBlock {
-    background-color: rgb(0, 119, 255);
+    background-color: rgb(0, 140, 255);
     color: white;
     border-radius: 10px;
 }
 
-.card {
+.card-body {
     display: inline-block;
     margin-left: 35px;
+    margin-bottom: 1em;
+    border: none;
+    width: 11em;
+    height: 13em;
 }
 
 .card-row {
@@ -139,6 +143,9 @@ p {
     }
     header {
         width: 100%;
+    }
+    .card {
+        display: inline-block;
     }
 }
 

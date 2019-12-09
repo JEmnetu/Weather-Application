@@ -14,7 +14,7 @@ $(document).ready(function() {
     var previousCities = '';
     var cityQ = '';
     var butto = $('#btnn');
-    var cities = JSON.parse(localStorage.getItem('cities'));
+    // var cities = JSON.parse(localStorage.getItem('cities'));
 
 
 
@@ -28,6 +28,11 @@ $(document).ready(function() {
     // 5 Day forecast API
     var queryURL2 = 'https://api.openweathermap.org/data/2.5/forecast?id=4366647&units=imperial&appid=' + APIKey;
 
+    // function renderHistory() {
+    //     for (i = 0; i < cities.length(); i++) {
+    //         console.log(cities[i]);
+    //     }
+    // }
 
     function clearDivs() {
         firstCard.empty();
@@ -187,40 +192,60 @@ $(document).ready(function() {
 
     }
 
-    function initialize() {
+    // function initialize() {
 
-        if (cities === null) {
-            cities = [];
-        }
-        citiesList = cities;
-        console.log(cities);
-    }
+    //     if (cities === null) {
+    //         cities = [];
+    //     }
+    //     citiesList = cities;
+    //     console.log(cities);
+    // }
 
     function search() {
         event.preventDefault();
-
-
-
-
-        clearDivs();
         cityQ = searchB.val();
-        currentWeather();
 
-        historyLink = $('<div>').html('<p onclick="currentWeather()"> ' + cityQ + '</p>');
+        if (cityQ !== '') {
+            clearDivs();
+            currentWeather();
+            renderWeather();
+
+        }
+    }
+
+    function renderWeather() {
+        historyLink = $('<div>');
+        historyText = '<p onclick="currentWeather"> ' + cityQ + '</p>';
         // Save city name to storage
-        citiesList.push(cityQ);
+        citiesList.push(historyText);
+        console.log(historyText);
         // var cityHistory = {
         //     city_name: cityQ
         // }
         // localStorage.setItem('Search Entry', cityHistory);
         // console.log(cityHistory);
-        localStorage.setItem('cities', JSON.stringify(citiesList));
-
+        localStorage.setItem('cities', JSON.stringify(historyText));
+        historyLink.append(historyText);
         historyLink.attr('data-city', cityQ);
         historyLink.addClass('historyBtn');
         historyEl.append(historyLink);
     }
 
+    // function weatherHistory() {
+    //     historyLink = $('<div>').html('<p onclick="currentWeather()"> ' + cityQ + '</p>');
+    //     // Save city name to storage
+    //     citiesList.push(cityQ);
+    //     // var cityHistory = {
+    //     //     city_name: cityQ
+    //     // }
+    //     // localStorage.setItem('Search Entry', cityHistory);
+    //     // console.log(cityHistory);
+    //     localStorage.setItem('cities', JSON.stringify(citiesList));
+
+    //     historyLink.attr('data-city', cityQ);
+    //     historyLink.addClass('historyBtn');
+    //     historyEl.append(historyLink);
+    // }
 
 
 
@@ -228,7 +253,9 @@ $(document).ready(function() {
 
 
 
-    initialize();
+
+    // initialize();
+    // $('window').load(renderHistory);
 
     searchF.on('submit', search);
 
